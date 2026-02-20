@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudSoft", "src\CloudSoft.csproj", "{A0131A55-ABD2-4783-B85C-47A91FA3F3A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.UnitTests", "tests\Services.UnitTests\Services.UnitTests.csproj", "{588F062F-93DE-469B-B116-A1B8D2FF7CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,24 @@ Global
 		{A0131A55-ABD2-4783-B85C-47A91FA3F3A3}.Release|x64.Build.0 = Release|Any CPU
 		{A0131A55-ABD2-4783-B85C-47A91FA3F3A3}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0131A55-ABD2-4783-B85C-47A91FA3F3A3}.Release|x86.Build.0 = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|x64.Build.0 = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Debug|x86.Build.0 = Debug|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|x64.ActiveCfg = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|x64.Build.0 = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|x86.ActiveCfg = Release|Any CPU
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A0131A55-ABD2-4783-B85C-47A91FA3F3A3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{588F062F-93DE-469B-B116-A1B8D2FF7CB7} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal

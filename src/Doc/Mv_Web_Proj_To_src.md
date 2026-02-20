@@ -42,7 +42,14 @@ dotnet run --project src/CloudSoft.csproj
 dotnet build src/CloudSoft.csproj --tl:off
 ```
 
-7. Remove root build artifacts so the root remains clean:
+7. Go back to the solution root folder and run the example test:
+
+```bash
+cd /Users/stephenucheosedumme/AzCLI/CloudSoft
+dotnet test tests/Services.UnitTests/Services.UnitTests.csproj
+```
+
+8. Remove root build artifacts so the root remains clean:
 
 ```bash
 rm -rf bin obj
