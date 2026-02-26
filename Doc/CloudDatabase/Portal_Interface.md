@@ -298,6 +298,8 @@ mongodb://<account>:<key>@<account>.mongo.cosmos.azure.com:10255/?ssl=true&retry
 ```
 
 > 🔐 Treat this like a password — never commit it to source control.
+>
+> Next step: use this connection string in the migration guide’s secure setup flow (`User Secrets` for Development and environment variables for Production) in `Doc/DataLayer/Migrating_to_CosmosDB.md` under **Step 2: Update the Connection String Configuration**.
 
 ---
 
@@ -387,4 +389,3 @@ Cosmos DB with MongoDB API combines **managed cloud infrastructure** with **Mong
 ## 🎉 Done!
 
 Great job! You’re now ready to automate this setup using **Azure CLI** and **Bicep** in the next exercises.
-

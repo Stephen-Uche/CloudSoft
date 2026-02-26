@@ -99,24 +99,78 @@ Data Explorer shows `cloudsoft → subscribers` (empty collection)
 
 ## Step 2: Update the Connection String Configuration
 
-Replace the local MongoDB connection string with the **Cosmos DB MongoDB API** connection string.
+Replace the local MongoDB connection string with the **Cosmos DB MongoDB API** connection string, but keep the secret value out of source control.
 
 ### Update `appsettings.json`
+
+Keep a placeholder (or empty string) in source control and store the real value in environment-specific configuration.
 
 ```json
 {
   "MongoDb": {
-    "ConnectionString": "mongodb://your-account:your-key@your-account.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000",
+    "ConnectionString": "",
     "DatabaseName": "cloudsoft",
     "SubscribersCollectionName": "subscribers"
   }
 }
 ```
 
-### 🔐 Recommended: Use User Secrets
+### Set the ASP.NET Core environment
+
+Use `Development` locally and `Production` when deployed.
+
+#### Local development
+
+```bash
+export ASPNETCORE_ENVIRONMENT=Development
+```
+
+```powershell
+$env:ASPNETCORE_ENVIRONMENT="Development"
+```
+
+#### Production (server/container/App Service)
+
+```bash
+export ASPNETCORE_ENVIRONMENT=Production
+```
+
+```powershell
+$env:ASPNETCORE_ENVIRONMENT="Production"
+```
+
+### 🔐 Development: Use User Secrets
+
+Initialize User Secrets once from the project folder (the folder containing the `.csproj`):
+
+```bash
+dotnet user-secrets init
+```
+
+```powershell
+dotnet user-secrets init
+```
+
+Then store the Cosmos DB connection string:
 
 ```bash
 dotnet user-secrets set "MongoDb:ConnectionString" "mongodb://your-account:your-key@your-account.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
+```
+
+```powershell
+dotnet user-secrets set "MongoDb:ConnectionString" "mongodb://your-account:your-key@your-account.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
+```
+
+### 🌍 Production: Use Environment Variables
+
+Set the same configuration key using double underscores (`__`) instead of `:`:
+
+```bash
+export MongoDb__ConnectionString="mongodb://your-account:your-key@your-account.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
+```
+
+```powershell
+$env:MongoDb__ConnectionString="mongodb://your-account:your-key@your-account.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
 ```
 
 ### ℹ Concept Deep Dive
@@ -127,13 +181,18 @@ dotnet user-secrets set "MongoDb:ConnectionString" "mongodb://your-account:your-
   * Docker MongoDB
   * Azure Cosmos DB (MongoDB API)
 * The migration succeeds because **infrastructure details are externalized into configuration**
+* ASP.NET Core configuration supports environment-specific sources:
+  * **Development**: User Secrets (for local machines)
+  * **Production**: environment variables (for deployed apps)
 
-User Secrets prevent accidental commits of sensitive credentials and are automatically loaded in the **Development** environment.
+User Secrets prevent accidental commits of sensitive credentials and are automatically loaded in the **Development** environment when using the default ASP.NET Core host builder.
 
 ### ⚠ Common Mistakes
 
 * Omitting `retrywrites=false` (causes write failures)
 * Committing the Cosmos DB connection string to Git
+* Using `MongoDb:ConnectionString` as an environment variable name instead of `MongoDb__ConnectionString`
+* Forgetting to set `ASPNETCORE_ENVIRONMENT`
 * Leaving Docker MongoDB stopped while still using the old connection string
 
 ✓ **Quick check:**
