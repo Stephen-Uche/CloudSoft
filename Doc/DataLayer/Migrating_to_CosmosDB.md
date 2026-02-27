@@ -305,7 +305,7 @@ Because the MongoDB repository is compatible with both backends, switching datab
 ✓ **Quick check:**
 Console output shows:
 
-```
+```bash
 Using MongoDB repository
 ```
 
@@ -342,9 +342,10 @@ dotnet run
 1. Open **Data Explorer**
 2. Navigate to:
 
-   ```
+   ```bash
    cloudsoft → subscribers → Documents
    ```
+
 3. Confirm documents appear with correct fields
 4. Verify unsubscribed entries are removed (or flagged)
 
