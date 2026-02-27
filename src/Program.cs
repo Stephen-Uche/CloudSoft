@@ -22,16 +22,24 @@ if (useMongoDb)
 
     // Configure MongoDB client
     builder.Services.AddSingleton<IMongoClient>(serviceProvider => {
-        var mongoDbOptions = builder.Configuration.GetSection(MongoDbOptions.SectionName).Get<MongoDbOptions>();
-        return new MongoClient(mongoDbOptions?.ConnectionString);
+        var mongoDbOptions = builder.Configuration.GetSection(MongoDbOptions.SectionName).Get<MongoDbOptions>()
+            ?? throw new InvalidOperationException(
+                $"Missing '{MongoDbOptions.SectionName}' configuration section.");
+
+        ValidateMongoDbOptions(mongoDbOptions);
+        return new MongoClient(mongoDbOptions.ConnectionString);
     });
 
     // Configure MongoDB collection
-    builder.Services.AddSingleton<IMongoCollection<Subscriber>>(serviceProvider => {
-        var mongoDbOptions = builder.Configuration.GetSection(MongoDbOptions.SectionName).Get<MongoDbOptions>();
+    builder.Services.AddSingleton(serviceProvider => {
+        var mongoDbOptions = builder.Configuration.GetSection(MongoDbOptions.SectionName).Get<MongoDbOptions>()
+            ?? throw new InvalidOperationException(
+                $"Missing '{MongoDbOptions.SectionName}' configuration section.");
+
+        ValidateMongoDbOptions(mongoDbOptions);
         var mongoClient = serviceProvider.GetRequiredService<IMongoClient>();
-        var database = mongoClient.GetDatabase(mongoDbOptions?.DatabaseName);
-        return database.GetCollection<Subscriber>(mongoDbOptions?.SubscribersCollectionName);
+        var database = mongoClient.GetDatabase(mongoDbOptions.DatabaseName);
+        return database.GetCollection<Subscriber>(mongoDbOptions.SubscribersCollectionName);
     });
 
     // Register MongoDB repository
@@ -76,3 +84,30 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+static void ValidateMongoDbOptions(MongoDbOptions options)
+{
+    if (string.IsNullOrWhiteSpace(options.ConnectionString))
+    {
+        throw new InvalidOperationException(
+            "MongoDB is enabled, but 'MongoDb:ConnectionString' is empty. " +
+            "Set it with User Secrets for Development or the 'MongoDb__ConnectionString' environment variable for Production.");
+    }
+
+    if (ContainsPlaceholder(options.ConnectionString))
+    {
+        throw new InvalidOperationException(
+            "MongoDB is enabled, but 'MongoDb:ConnectionString' still contains template placeholders such as '{hostname}' or '{port}'. " +
+            "Replace it with a real MongoDB/Cosmos DB connection string. " +
+            "For Development use 'dotnet user-secrets set \"MongoDb:ConnectionString\" \"...\"'. " +
+            "For Production use the 'MongoDb__ConnectionString' environment variable.");
+    }
+}
+
+static bool ContainsPlaceholder(string connectionString)
+{
+    return connectionString.Contains("{", StringComparison.Ordinal)
+        || connectionString.Contains("}", StringComparison.Ordinal)
+        || connectionString.Contains("<", StringComparison.Ordinal)
+        || connectionString.Contains(">", StringComparison.Ordinal);
+}
