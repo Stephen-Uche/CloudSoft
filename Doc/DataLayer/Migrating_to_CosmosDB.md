@@ -143,11 +143,7 @@ $env:ASPNETCORE_ENVIRONMENT="Production"
 
 Initialize User Secrets once from the project folder (the folder containing the `.csproj`):
 
-```bash
-dotnet user-secrets init
-```
-
-```powershell
+```bash/powershell
 dotnet user-secrets init
 ```
 
