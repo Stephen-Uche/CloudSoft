@@ -1,4 +1,4 @@
-````md
+
 # 11. Implement Unit Tests and Organize Solution
 
 ## Goal
@@ -26,7 +26,7 @@ From your project root, remove the existing `.sln` file (if you have one):
 
 ```bash
 rm *.sln
-````
+```
 
 ### 2. Move the Web project into `/src`
 
