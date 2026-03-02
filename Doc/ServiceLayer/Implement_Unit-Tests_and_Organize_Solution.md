@@ -320,5 +320,3 @@ dotnet test
 
 You’ve successfully organized your project and implemented unit tests!
 
-```
-```
