@@ -343,5 +343,3 @@ public class NewsletterController : Controller
 
 You’ve successfully implemented a **service layer** with modern patterns and practices!
 
-```
-```
