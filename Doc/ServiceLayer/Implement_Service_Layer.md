@@ -1,4 +1,4 @@
-````md
+
 ## 10. Implement Service Layer (Newsletter)
 
 ### Goal
