@@ -1,4 +1,4 @@
-```md
+
 # Implement the Repository Pattern (Newsletter Subscriptions)
 
 ## Goal
@@ -348,5 +348,3 @@ Why `Scoped` for the service?
 
 You’ve successfully implemented the **Repository Pattern** with a **thread-safe in-memory database** for newsletter subscriptions.
 
-```
-```

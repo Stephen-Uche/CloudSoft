@@ -1,5 +1,4 @@
 
----
 # Provisioning Cosmos DB via Azure Portal
 
 ## 🎯 Goal
@@ -385,7 +384,3 @@ Cosmos DB with MongoDB API combines **managed cloud infrastructure** with **Mong
 * Review **Firewall & VNet** settings
 
 ---
-
-## 🎉 Done!
-
-Great job! You’re now ready to automate this setup using **Azure CLI** and **Bicep** in the next exercises.

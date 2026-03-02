@@ -28,6 +28,7 @@ By the end of this exercise, you will:
 2. Add the code below:
 
 **Models/OperationResult.cs**
+
 ```csharp
 namespace CloudSoft.Models;
 
@@ -45,7 +46,7 @@ public class OperationResult
     public static OperationResult Success(string message) => new(true, message);
     public static OperationResult Failure(string message) => new(false, message);
 }
-````
+```
 
 ### ℹ️ Information (Why this matters)
 
@@ -79,7 +80,9 @@ public interface INewsletterService
     Task<OperationResult> OptOutFromNewsletterAsync(string email);
     Task<IEnumerable<Subscriber>> GetActiveSubscribersAsync();
 }
+
 ```
+
 
 ### ℹ️ Information
 
@@ -97,7 +100,6 @@ public interface INewsletterService
 * Better scalability
 * Easy upgrade to DB-backed code later
 
----
 
 ## Step 3: Implement the Newsletter Service
 
